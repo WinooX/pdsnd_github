@@ -36,6 +36,7 @@ def get_filters():
     # get user input for month (all, january, february, ... , june)
     # get user input for day of week (all, monday, tuesday, ... sunday)
     while fil in ['month', 'day', 'both', 'none']:
+        # User wants to be filtered by both month and day
         if fil == 'both':
             month = input("Which month would you like to fliter the data by, or not at all? January, February, March, April, May, or June?\n").lower()
             while month not in ['january', 'february', 'march', 'april', 'may', 'june']:
@@ -45,14 +46,14 @@ def get_filters():
             while day not in [0, 1, 2, 3, 4, 5, 6]:
                 print("Invaild entry, please try again:")
                 day = int(input("Which day? Please enter an interger(0 = Monday, 1 = Tuesday...)\n"))
-
+        #User wants to be filtered by month only
         elif fil == 'month':
             month = input("Which month would you like to fliter the data by, or not at all? January, February, March, April, May, or June?\n").lower()
             while month not in ['january', 'february', 'march', 'april', 'may', 'june']:
                 print("Invaild entry, please try again:")
                 month = input("Which month would you like to fliter the data by, or not at all? January, February, March, April, May, or June?\n").lower()
             day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-
+        #User wants to be filtered by day only
         elif fil == 'day':
             month = ['january', 'february', 'march', 'april', 'may', 'june']
             day = int(input("Which day? Please enter an interger(0 = Monday, 1 = Tuesday...)\n"))
