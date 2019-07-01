@@ -23,17 +23,17 @@ def get_filters():
     print('Hello! Let\'s explore some US bikeshare data!')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     city = input("Would you like to see the data for Chicago, New York city or Washington?\n").lower()
-    while city not in CITY_DATA: 
+    while city not in CITY_DATA:
             print("Oops it seems not right! Please enter the city name again.")
             city = input("Would you like to see the data for Chicago, New York city or Washington?\n").lower()
-            
+
     # get use user choose the filter they want
     fil = input("Would you like to filter the data by month, day, both or not at all? Type 'none' for no time filter\n").lower()
     while fil not in ['month', 'day', 'both', 'none']:
         print("Invaild entry, please try again:")
         fil = input("Would you like to filter the data by month, day, both or not at all? Type 'none' for no time filter\n").lower()
-    
-    # TO DO: get user input for month (all, january, february, ... , june)   
+
+    # TO DO: get user input for month (all, january, february, ... , june)
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     while fil in ['month', 'day', 'both', 'none']:
         if fil == 'both':
@@ -45,27 +45,27 @@ def get_filters():
             while day not in [0, 1, 2, 3, 4, 5, 6]:
                 print("Invaild entry, please try again:")
                 day = int(input("Which day? Please enter an interger(0 = Monday, 1 = Tuesday...)\n"))
-                      
+
         elif fil == 'month':
             month = input("Which month would you like to fliter the data by, or not at all? January, February, March, April, May, or June?\n").lower()
             while month not in ['january', 'february', 'march', 'april', 'may', 'june']:
                 print("Invaild entry, please try again:")
                 month = input("Which month would you like to fliter the data by, or not at all? January, February, March, April, May, or June?\n").lower()
             day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-            
+
         elif fil == 'day':
             month = ['january', 'february', 'march', 'april', 'may', 'june']
             day = int(input("Which day? Please enter an interger(0 = Monday, 1 = Tuesday...)\n"))
             while day not in [0, 1, 2, 3, 4, 5, 6]:
                 print("Invaild entry, please try again:")
                 day = int(input("Which day? Please enter an interger(0 = Monday, 1 = Tuesday...)\n"))
-            
+
         else:
             month = ['january', 'february', 'march', 'april', 'may', 'june']
             day = [0, 1, 2, 3, 4, 5, 6]
-            
+
         break
-        
+
 
     print('-'*40)
     return city, month, day
@@ -83,17 +83,17 @@ def load_data(city, month, day):
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
-    
+
     # load data file into a dataframe
     df = pd.read_csv(CITY_DATA[city])
-    
+
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
     # extract month and day of week from Start Time to create new columns
     df['month'] = df['Start Time'].dt.month
-    df['day_of_week'] = df['Start Time'].dt.dayofweek 
-        
+    df['day_of_week'] = df['Start Time'].dt.dayofweek
+
     return df
 
 
@@ -114,14 +114,14 @@ def time_stats(df):
     # TO DO: display the most common start hour
     df['hour'] = df['Start Time'].dt.hour
     common_hour = df['hour'].mode()[0]
-    
+
     print("\nWhat's the most popular month to travel?\n")
     print(calendar.month_name[common_month])
     print("\nWhat's the most popular day to travel?\n")
     print(calendar.day_name[common_day])
     print("\nWhat's the most popular hour to travel?\n")
     print(common_hour)
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
     return common_month, common_day, common_hour
@@ -181,7 +181,7 @@ def user_stats(df):
     early_year = 0
     recent_year = 0
     common_year = 0
-    
+
     print('\nCalculating User Stats...\n')
     start_time = time.time()
 
@@ -190,7 +190,7 @@ def user_stats(df):
     print("\nWhat's the breakdown of users?\n")
     print(user_type)
 
-    # TO DO: Display counts of gender
+    # Display counts of gender
     try:
         gender = df['Gender'].value_counts()
         print("\nWhat's the breakdown of gender\n")
@@ -200,7 +200,7 @@ def user_stats(df):
         print("\nThere is no gender information.\n")
         pass
 
-    # TO DO: Display earliest, most recent, and most common year of birth
+    # Display earliest, most recent, and most common year of birth
     try:
         early_year = df.sort_values(by = 'Birth Year', ascending = True, na_position = 'last').head(n=1)
         recent_year = df.sort_values('Birth Year', ascending = False, na_position = 'last').head(n=1)
@@ -211,7 +211,7 @@ def user_stats(df):
     except KeyError:
         print("\nThere is no birth year information.\n")
         pass
-      
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
     return user_type, gender, early_year, recent_year, common_year
@@ -225,18 +225,18 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        
+
         raw_data = input("\nWould you like to see some raw data? yes or no.\n").lower()
         while raw_data not in ['yes', 'no']:
             print("\nI don't get it...\n")
             raw_data = input("\nWould you like to see some raw data? yes or no.\n").lower()
-        
+
         if raw_data == 'yes':
             print(df.iloc[0:5])
         else:
             print("uhmmmm.....")
-        
 
+        # Ask if the user would like to see more result
         i = 0
         j = 0
         for j in range(df.shape[0]):
@@ -250,10 +250,10 @@ def main():
                     break
             else:
                 continue
-            break 
+            break
         else:
             continue
-                
+
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
