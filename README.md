@@ -5,7 +5,7 @@ June 04, 2019
 Explore US Bikeshare Data
 
 ### Description
-The project takes in user's input to create an interactive experience in the terminal that answers questions about data related to bike share system for three major cities in the United States - Chicago, New York City and Washington.
+The project takes in user's input to create an interactive experience in the terminal that answers questions about data related to bike share system for three major cities in the United States - Chicago, New York City and Washington. We will explore how the bike-sharing systems are used.
 
 ### Files used
 chicago.csv
