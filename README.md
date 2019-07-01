@@ -1,15 +1,17 @@
 ### Date created
-Include the date you created this project and README file.
+June 04, 2019
 
 ### Project Title
-Replace the Project Title
+Explore US Bikeshare Data
 
 ### Description
-Describe what your project is about and what it does
+The project takes in user's input to create an interactive experience in the terminal that answers questions about data related to bike share system for three major cities in the United States - Chicago, New York City and Washington.
 
 ### Files used
-Include the files used
+chicago.csv
+new_york_city.csv
+washington.csv
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
-
+https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.sort_values.html
+https://datatofish.com/sort-pandas-dataframe/
